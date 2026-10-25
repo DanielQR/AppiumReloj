@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.daniel'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Cliente de Appium para Java (incluye Selenium)
+    implementation 'io.appium:java-client:10.1.1'
+
+    // JUnit 5 para escribir y ejecutar los tests
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+
+    // Muestra en consola qué tests pasaron o fallaron
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        showStandardStreams = true
+    }
+}
